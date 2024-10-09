@@ -1,0 +1,52 @@
+#Create a database (You need to give meaningful name)
+ans:-
+create database Assingnment;
+use assingnment;
+
+#Create a table. Schema should be based on the Ul provided. Give it meaningful name.
+ans:-
+CREATE TABLE UserAddress (
+    UserID INT AUTO_INCREMENT PRIMARY KEY,
+    FirstName VARCHAR(50),
+    LastName VARCHAR(50),
+    PhoneNumber int(15),
+    EmailAddress VARCHAR(100),
+    StreetAddress VARCHAR(255),
+    AptSuite VARCHAR(50),
+    City VARCHAR(50),
+    State VARCHAR(50),
+    ZipCode VARCHAR(10),
+    EmailOptIn BOOLEAN
+);
+#this is used for i take int but i want to update int to BIGINT
+ALTER TABLE UserAddress
+MODIFY COLUMN PhoneNumber BIGINT;
+
+#Insert Dummy Data.
+ans:-
+INSERT INTO UserAddress (FirstName, LastName, PhoneNumber, EmailAddress, StreetAddress, AptSuite, City, State, ZipCode, EmailOptIn)
+VALUES
+('John', 'Doe', 5551234, 'john.doe@example.com', '123 Main St', 'Apt 101', 'Mount Rainier', 'Maryland', '20712', TRUE),
+('Jane', 'Smith', 5555678, 'jane.smith@example.com', '456 Oak St', NULL, 'Mount Rainier', 'Maryland', '20712', FALSE);
+
+Read All user Address.
+ans:-
+select * from UserAddress;
+
+#this queary add becuse of sql is in safe mode thats why i turn off
+SET SQL_SAFE_UPDATES = 0;
+
+#Update User Address.
+ans:-
+UPDATE UserAddress
+SET AptSuite = 'Apt 203'
+WHERE FirstName = 'John' ;
+
+#Delete User Address.
+DELETE FROM UserAddress
+WHERE FirstName = 'Jane' AND LastName = 'Smith';
+
+#Filter user address based on Condition.
+SELECT FirstName, LastName, EmailAddress
+FROM UserAddress
+WHERE EmailOptIn = TRUE;

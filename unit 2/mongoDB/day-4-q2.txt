@@ -1,0 +1,39 @@
+Q1. Using $group with a null grouping key, how can we find the average rating across all documents?
+Ans: db.oyo.aggregate([
+    {$group: {_id: null, avg: {$avg: "$RATING"}}}])
+
+Q2. How can we group documents by the RATING to see how many hotels have the same rating?
+Ans: db.oyo.aggregate([
+    {$group: {_id: '$RATING' , count: {$sum: 1}} } ])
+
+Q3. How can we group documents by RATING and use $push to gather all ADDRESSes of hotels for each rating level?
+Ans: db.oyo.aggregate([
+    {$group: {_id: '$RATING', allAddresses: {$push: "$ADDRESS"}} } ])
+
+Q4. How do we group documents by RATING and include all details of the hotels (entire documents) using $$ROOT?
+Ans: db.oyo.aggregate([
+    {$group: {_id: '$RATING', allDetails: {$push: "$$ROOT"}} } ])
+
+Q5. How do we group hotels by their RATING and count the number of hotels at each rating level?
+Ans: db.oyo.aggregate([
+    {$group: {_id: '$RATING', count: {$sum: 1}} } ])
+
+Q6. How do we find the maximum, minimum, and average FINAL_COST of hotels grouped by CATEGORY?
+Ans: db.oyo.aggregate([
+    {$group: {_id: '$CATEGORY', max: {$max: "$FINAL_COST"}, min: {$min: "$FINAL_COST"}, avg: {$avg: "$FINAL_COST"}} } ])
+
+Q7. What is the query to group hotels by RATING and calculate the maximum, minimum, and average BASE_COST for each rating level?
+Ans:  db.oyo.aggregate([
+    {$group: {_id: '$RATING', max: {$max: "$BASE_COST"}, min: {$min: "$BASE_COST"}, avg: {$avg: "$BASE_COST"}} } ])
+
+Q8. How do we use $project to show only the NAME, ADDRESS, and FINAL_COST of each hotel?
+Ans: db.oyo.aggregate([
+    {$project: {NAME: 1, ADDRESS: 1, FINAL_COST: 1, _id: 0}} ])
+
+Q9. How do we use $unwind to separate each AMENITYS item into its own document for further analysis?
+Ans: db.oyo.aggregate([
+    {$unwind: "$AMENITYS"} ])
+
+Q10. How can we add a new field DISCOUNT to each document, showing the difference between BASE_COST and FINAL_COST?
+Ans: db.oyo.aggregate([
+    {$addFields: {DISCOUNT: {$subtract: ["$BASE_COST", "$FINAL_COST"]}}} ])

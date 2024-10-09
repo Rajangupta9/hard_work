@@ -1,0 +1,33 @@
+create database HealthTrack;
+use HealthTrack;
+ select*from patients;
+# task1 
+SELECT patient_name,treatment , SUM(cost) as total_spending
+FROM patients
+GROUP BY patient_name, treatment
+ORDER BY total_spending DESC
+LIMIT 10 OFFSET 5;
+# task 2
+SELECT treatment, COUNT(*) as num_visits
+FROM patients
+GROUP BY treatment
+HAVING COUNT(*) >= 50
+ORDER BY num_visits DESC;
+# task 3 
+SELECT patient_name, age, gender, COUNT(*) as num_visits
+FROM patients
+GROUP BY patient_name, age, gender
+HAVING COUNT(*) > 10
+ORDER BY num_visits DESC;
+# task 4 
+SELECT doctor, AVG(cost) as avg_cost
+FROM patients
+GROUP BY doctor
+HAVING AVG(cost) > 200
+ORDER BY avg_cost DESC;
+# task 5 
+SELECT visit_date, COUNT(*) as num_visits
+FROM patients
+WHERE visit_date >= DATE_SUB(CURRENT_DATE, INTERVAL 30 DAY)
+GROUP BY visit_date
+ORDER BY visit_date;

@@ -1,0 +1,96 @@
+1. Calculate the discount amount for each product using the formula (market_price -
+sale _ price) .
+ans:-
+select product , sale_price , market_price,
+(market_price - sale_price) as discount_amount from products;
+
+2. Determine the discount percentage for each product using the formula ( (market_price -
+sale _ price) / market_price)* 100 .
+ans:-
+select product , sale_price, market_price,
+((market_price - sale_price) / market_price) * 100  as discount_percentage from products;
+
+3. Find the modulo of sale price by 10 for each product.
+ans:-
+select product, sale_price,
+(sale_price % 10) as modulo_sale_price from products;
+
+4. Find products with a rating equal to or higher than 4.0.
+ans:-
+select product , rating 
+from products
+where rating >= 4.0;
+
+5. Identify products whose market price is different from the sale price.
+ans:-
+select product , market_price, sale_price
+from products
+where market_price != sale_price;
+
+6. List products with a sale price less than or equal to 500.
+ans:-
+select product , sale_price
+from products
+where sale_price <= 500;
+
+7. Retrieve products with a sale price between 200 and 400 inclusive.
+ans:-
+select product , sale_price from products
+where sale_price >=200 and sale_price <= 400;
+
+8. Find products with a rating above 4.5 and a sale price below 300.
+ans:-
+select product , rating , sale_price from products
+where rating > 4.5 and sale_price<300;
+
+9. Get products with either a type 'Lamp & Lamp Oil' or 'Roasted Seeds & Nuts'.
+ans:-
+select product , type from products
+where type = "Lamp & Lamp Oil" or type = "Roasted Seeds & Nuts";
+
+10. Locate products that do not have 'Home' as their category.
+ans:-
+select * from products
+where category != "Home";
+
+11. Sort products by their sale price in ascending order.
+ans:-
+select * from products
+order by sale_price;
+
+12. Sort products by their category in descending order.
+ans:-
+select * from products
+order by category desc;
+
+13. Sort products first by their type in ascending order and then by their rating in descending order.
+ans:-
+select * from products
+order by type , rating desc;
+
+14. Retrieve the top 5 products with the highest rating.
+ans:-
+select * from products
+order by rating desc 
+limit 5;
+
+15. Get the next 5 products after the top 5 products with the highest rating
+ans:-
+select * from products
+order by rating desc 
+limit 5 offset 5;
+
+16. Display only 3 products with the lowest sale price.
+ans:-
+select * from products
+order by sale_price
+limit 3;
+
+17. Find all distinct categories present in the dataset.
+ans:-
+select distinct category from products;
+
+18. List all distinct brands within the 'Beauty & Hygiene' category.
+ans:-
+select distinct brand from products
+where category = "Beauty & Hygiene";

@@ -1,0 +1,38 @@
+Q1. How can we group all documents in the collection without specifying a grouping key, to count the total number of documents?
+Ans: db.oyo.aggregate([
+    {$group: {_id: null, totalDocuments: {$sum :1 }}}])
+
+Q2. How do we group documents by the CATEGORY field to count the number of hotels in each category?
+Ans: db.oyo.aggregate([
+    {$group: {_id: '$CATEGORY', totalHotels: {$sum :1 }}}])
+
+Q3. How do we group hotels by CATEGORY and use $push to create an array of all hotel names within each category?
+Ans: db.oyo.aggregate([
+    {$group: {_id: '$CATEGORY', HotelNames: {$push: '$NAME'}}}])
+
+Q4. How can we group hotels by CATEGORY and include the entire document for each hotel in the results using $$ROOT?
+Ans: db.oyo.aggregate([
+    {$group: {_id: '$CATEGORY', allDetails: {$push: '$$ROOT'}}}])
+
+Q5. How can we group documents by CATEGORY and count the number of hotels in each category using {$sum: 1}?
+Ans: db.oyo.aggregate([
+    {$group: {_id: '$CATEGORY', totalHotels: {$sum :1 }}}])
+
+Q6. How can we determine the maximum, minimum, and average room size (assuming room size can be parsed as a number) across all hotels?
+Ans: db.oyo.aggregate([
+    {$group: {_id: '$ROOM SIZE', max: {$max : '$ROOM SIZE'}, min: {$min : '$ROOM SIZE'}, avg: {$avg : '$ROOM SIZE'}}}])
+
+Q7. Grouping by CATEGORY, how can we find the hotel with the highest RATING in each category?
+Ans: db.oyo.aggregate([
+    {$group: {_id: '$CATEGORY', maxRating: {$max: "$RATING"}}}])
+
+Q8. How can we use $project to include the NAME, RATING, and a calculated field showing the difference between FINAL_COST and BASE_COST?
+Ans: db.oyo.aggregate([
+    {$project: {NAME: 1, RATING: 1, DIFF: {$subtract: ["$FINAL_COST", "$BASE_COST"]}}} ])
+
+Q9. Using $unwind, how can we expand the IMAGES array to work with each image URL in separate documents?
+Ans: db.oyo.aggregate([{$unwind: "$IMAGES"}])
+
+Q10. How do we use $addField to add a field in all the document with name "onboardStatus" and value as true.
+Ans: db.oyo.aggregate([
+    {$addFields: {onboardStatus: true}}])

@@ -1,0 +1,94 @@
+-- task1
+select CONCAT(e.first_name, ' ', e.last_name) AS full_name , c.company
+from employe e
+inner join company c on e.companyID = c.id;
+-- task2
+select concat(e.first_name,' ' , last_name) as full_name , c.country
+from employe e
+inner join company c on e.companyID = c.id;
+-- task3
+select c.company , avg(e.salary) as average_salary
+from employe e
+inner join company c on e.companyID = c.id
+group by c.company;
+-- task4
+select c.company , max(e.salary) as highest_salary
+from employe e
+inner join company c on e.companyID = c.id
+group by c.company
+order by highest_salary Desc;
+
+-- task5
+select c.company , count(e.department) as total_department
+from employe e
+inner join company c on e.companyID = c.id
+group by c.company;
+-- task6
+select c.company , count(distinct e.id) as total_employe
+from employe e
+inner join company c on e.companyID = c.id
+group by c.company;
+-- task7
+select e.department , max(e.salary) as highest_salary
+from employe e
+inner join company c on e.companyID = c.id
+group by e.department 
+order by highest_salary desc;
+-- task8
+SELECT c.company AS CompanyName
+FROM company c
+JOIN employe e ON e.companyID = c.id
+WHERE e.first_name LIKE 'S%'
+GROUP BY c.company
+ORDER BY COUNT(e.id) DESC
+LIMIT 1;
+-- task9
+SELECT e.department, AVG(e.salary) AS AvgSalary
+FROM employe e
+GROUP BY e.department;
+
+-- task10
+SELECT c.company AS CompanyName, CONCAT(e.first_name, ' E.', e.last_name) AS FullName
+FROM company c
+JOIN employe e ON e.companyID = c.id;
+
+-- task11
+SELECT e.email
+FROM employe e;
+-- task12
+SELECT CONCAT(e.first_name, ' ', e.last_name) AS EmployeeName
+FROM employe e
+WHERE e.department = 'Engineering';
+-- task13
+SELECT DISTINCT e.department
+FROM employe e;
+-- task14
+SELECT COUNT(e.id) AS TotalEmployees
+FROM employe e
+WHERE e.department = 'Support';
+-- task15
+SELECT c.company AS CompanyName
+FROM company c
+WHERE c.country = 'United States';
+-- task16
+SELECT e.first_name
+FROM employe e
+WHERE e.salary > 300000;
+-- task17
+SELECT e.last_name
+FROM employe e
+JOIN company c ON e.companyID = c.id
+WHERE c.country = 'Brazil';
+-- task18
+SELECT CONCAT(e.first_name, ' ', e.last_name) AS EmployeeName
+FROM employe e
+WHERE e.gender = 'Agender';
+-- task19
+SELECT DISTINCT c.company AS CompanyName
+FROM company c
+JOIN employe e ON e.companyID = c.id
+WHERE e.department = 'Human Resources';
+-- task20
+SELECT CONCAT(e.first_name, ' ', e.last_name) AS EmployeeName, e.department
+FROM employe e
+WHERE e.salary < 100000;

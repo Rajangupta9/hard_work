@@ -1,0 +1,41 @@
+### Title: Easy Wood Cutter
+
+### Level: Level 1 - Easy
+
+### Time to Solve the Problem: 5 Mins
+
+### Problem Description
+
+Write the Psuedocode for below :
+
+You are given a number, stored in a variable named `N`. Your task is to determine whether `N` is divisible by 3. A number that is divisible by 3 will be evenly divisible, meaning no remainder or fractional part after division.
+
+### Input
+
+**Input Format:**
+A single line that contains the length of the wood, represented by the integer `N`.
+
+
+
+### Output
+
+**Output Format:**
+Print "Yes" if `N` is divisible by 3; otherwise, print "No".
+
+### Sample Input 1
+6
+
+
+### Sample Output 1
+Yes
+
+begin 
+    input: N
+
+    if n%3 == 0 then 
+    print "Yes"
+
+    else
+       print "NO"
+
+End       

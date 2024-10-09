@@ -1,0 +1,37 @@
+### Input
+
+The first and the only line of input contains the values stored in `num1` and `num2`.
+
+### Output
+
+Print the result of three operations, one by one, on a new line.
+
+### Sample Input 1
+4 16
+### Sample Output 1
+false true false
+
+begin 
+    input: num1 , num2
+
+    if num1>num2 then
+    print "true"
+
+    else
+        print "false"
+
+    if num1<num2 then
+    print "true"
+
+    else 
+        print "false"
+
+    if num1==num2 then 
+    pirnt "true"
+
+    else 
+        print"false"
+End   
+
+     
+     

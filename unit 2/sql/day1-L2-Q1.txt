@@ -1,0 +1,67 @@
+create table books(
+book_id int,
+title text,
+author text,
+genre text,
+price decimal(10,2),
+published_date date,
+reating decimal(10,2),
+stock int
+
+);
+//here i did it wrong name column and i rename it .
+alter table books
+rename column reating to rating;
+
+
+INSERT INTO books (book_id, title, author, genre, price, published_date, rating, stock) VALUES
+(1, 'The Silent Patient', 'Alex Michaelides', 'Thriller', 15.99, '2019-02-05', 4.3, 12),
+(2, 'Where the Crawdads Sing', 'Delia Owens', 'Mystery', 18.00, '2018-02-20', 4.5, 5),
+(3, 'Becoming', 'Michelle Obama', 'Biography', 25.00, '2018-11-13', 4.8, 3),
+(4, 'Educated', 'Tara Westover', 'Memoir', 22.00, '2011-09-13', 4.7, 8),
+(5, 'The Night Circus', 'Erin Morgenstern', 'Fantasy', 12.50, '2013-09-23', 4.1, 10),
+(6, 'Normal People', 'Sally Rooney', 'Romance', 14.99, '2017-09-12', 4.2, 2),
+(7, 'Circe', 'Madeline Miller', 'Fantasy', 16.99, '2019-04-16', 4.4, 25),
+(8, 'The Goldfinch', 'Donna Tartt', 'Fiction', 20.00, '2018-04-10', 4.0, 4),
+(9, 'The Alchemist', 'Paulo Coelho', 'Adventure', 10.99, '1988-04-15', 4.6, 7),
+(10, 'Little Fires Everywhere', 'Celeste Ng', 'Fiction', 17.99, '2018-04-10', 4.3, 9);
+
+select * from books;
+
+//this is not give the correct output.
+select genre ,title, rating from books
+order by rating DESC;
+
+# query 1: 
+SELECT b.genre, b.title, b.rating
+FROM books b
+JOIN (
+    SELECT genre, MAX(rating) AS MaxRating
+    FROM books
+    GROUP BY genre
+) AS max_ratings ON b.genre = max_ratings.genre AND b.rating = max_ratings.MaxRating;
+
+# Query 2:
+select book_id , title , author, price from books
+where price >=10 and price <= 30
+order by price ;
+
+# query 3:
+select  title , author  from books
+order by published_date Desc
+limit 5;
+
+# qurery 4:
+SELECT book_id, title, author
+FROM books
+WHERE stock = 0;
+
+# qurey 6: incorrect
+select author, title , price
+from books
+order by price Desc limit 3;
+
+#query 7:
+select book_id , title , rating , stock  from books
+where rating >= 4.0 AND published_date > '2000-01-01'
+order by rating Desc;

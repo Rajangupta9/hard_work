@@ -1,0 +1,125 @@
+Q1. How many hotels have a rating of 4 or higher?
+Ans: db.oyo.countDocuments({ RATING: { $gte: 4 } });
+
+db.oyo.aggregate([
+    {
+        $match: { RATING: { $gte: 4 } }
+    },
+    {
+        $group: {
+            _id: null,
+            total: { $sum: 1 }
+        }
+    }
+])
+
+
+
+Q2. Retrieve the names and addresses of the first 5 hotels sorted by final cost in ascending order.
+Ans: db.oyo.find({}, { name: 1, address: 1, _id: 0 }).sort({ final_cost: 1 }).limit(5);
+    
+     db.oyo.aggregate([
+  {
+    $project: {
+      NAME: 1,
+      ADDRESS: 1,
+      _id: 0
+    }
+  },
+  {
+    $sort: {
+      FINAL_COST: 1
+    }
+  },
+  {
+    $limit: 5
+  }
+]);
+
+
+
+Q3. How can you skip the first 10 hotels and then retrieve the next 5 hotels when sorted by rating in descending order
+Ans: db.oyo.find().sort({ RATING: -1 }).skip(10).limit(5);
+
+ddb.oyo.aggregate([
+  {$project: {NAME:1 , RATING:1, _id:0}},
+  {$sort: {RATING: -1}},
+  {$limit: 10}
+])
+
+Q4. Find the names and ratings of hotels, sorting them in descending order of ratings and limiting the results to 10.
+Ans: db.oyo.find({}, { NAME: 1, RATING: 1, _id: 0 }).sort({ RATING: -1 }).limit(10);
+
+
+Q5. Retrieve only the names and addresses of all hotels.
+Ans: db.oyo.find({}, { NAME: 1, ADDRESS: 1, _id: 0 });
+
+db.oyo.aggregate([
+  {$project: {NAME:1 , ADDRESS:1 , _id:0}}
+])
+
+
+
+Q6.  How do you get the list of amenities and room sizes available in hotels without including their IDs?
+Ans: db.oyo.find({}, { amenities: 1, room_size: 1, _id: 0 });
+
+db.oyo.aggregate([
+  {$project: {AMENITYS:1, 'ROOM SIZE': 1, _id:0}}
+])
+
+
+
+Q7.  Can you display only the final cost and category for all hotels?
+Ans: db.oyo.find({}, { amenities: 1, room_size: 1, _id: 0 });
+
+
+Q8.  List the names of hotels along with their images.
+Ans: db.oyo.find({}, { name: 1, image: 1, _id: 0 });
+
+
+Q9. How can you find hotels where the final cost is greater than the base cost by at least 100?
+Ans: db.oyo.find({ $expr: { $gte: [{ $subtract: ["$final_cost", "$base_cost"] }, 100] } });
+
+
+Q10. Retrieve hotels where the number of amenities is exactly 3.
+Ans: db.oyo.find({ amenities: { $size: 3 } });
+
+
+Q11. Find hotels that offer both "WiFi" and "AC" amenities.
+Ans: db.oyo.find({ amenities: { $all: ["WiFi", "AC"] } });
+
+ 
+Q12. Which hotels have either "TV" or "AC" as amenities?
+Ans: db.oyo.find({ amenities: { $in: ["TV", "AC"] } });
+
+
+Q13.  Match hotels with a rating of 5.
+Ans: db.oyo.find({ rating: 5 });
+
+
+Q14. Match hotels located in "Telangana".
+Ans: db.oyo.find({ ADDRESS: /Telagana/});
+
+Q15. Limit to the first 3 hotels when retrieving data.
+Ans: db.oyo.find().limit(3);
+
+ 
+Q16. How do you limit results to the 2 highest-rated hotels?
+Ans: db.oyo.find().sort({ rating: -1 }).limit(2);
+
+
+Q17. Sort hotels by their base cost in descending order.
+Ans: db.oyo.find().sort({ base_cost: -1 });
+
+
+Q18. Sort hotels by name alphabetically.
+Ans:  db.oyo.find().sort({ name: 1 });
+
+
+Q19. Skip the top 5 hotels based on rating.
+Ans: db.oyo.find().sort({ rating: -1 }).skip(5);
+
+
+Q20. Skip the first 2 hotels when displaying results.
+Ans: db.oyo.find().skip(2);
+

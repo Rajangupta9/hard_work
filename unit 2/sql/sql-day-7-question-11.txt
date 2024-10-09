@@ -1,0 +1,119 @@
+Query 1: The Overpopulated Planets
+Retrieve the names and populations of planets in each galaxy where the population exceeds the average population of all planets in that galaxy by more than 20%.
+
+
+SELECT 
+    planet_name, 
+    population, 
+    galaxy 
+FROM 
+    planets AS p
+WHERE 
+    population > (
+        SELECT AVG(population) * 1.2
+        FROM planets
+        WHERE galaxy = p.galaxy
+    );
+
+Query 2: Top Resource Planets
+Identify the planets that have the highest quantity of each type of resource. Return the planet name and the quantity of the resource.
+
+
+SELECT 
+    r.resource_name, 
+    p.planet_name, 
+    r.quantity 
+FROM 
+    resources AS r
+JOIN planets AS p
+    ON r.planet_id = p.planet_id
+WHERE 
+    (r.resource_name, r.quantity) IN (
+        SELECT 
+            resource_name, 
+            MAX(quantity) 
+        FROM resources 
+        GROUP BY resource_name
+    );
+
+Query 3: Leading Colonist Professions
+Create a view LeadingProfessions that lists the top 3 professions (by the number of colonists) for each planet.
+
+
+CREATE VIEW LeadingProfessions AS
+SELECT 
+    p.planet_name, 
+    c.profession, 
+    COUNT(c.colonist_id) AS colonist_count
+FROM 
+    colonists AS c
+JOIN planets AS p 
+    ON c.planet_id = p.planet_id
+GROUP BY 
+    p.planet_name, 
+    c.profession
+ORDER BY 
+    p.planet_name, 
+    colonist_count DESC
+LIMIT 3;
+
+Query 4: Cross-Galaxy Space Station Capacity
+Using a CTE, calculate the total capacity of space stations within each galaxy. Return the names of galaxies where the total capacity exceeds the combined capacity of all space stations in the galaxy with the median total capacity.
+
+
+WITH StationCapacity AS (
+    SELECT 
+        galaxy, 
+        SUM(capacity) AS total_capacity
+    FROM 
+        space_stations AS ss
+    JOIN planets AS p 
+        ON ss.planet_id = p.planet_id
+    GROUP BY galaxy
+),
+MedianCapacity AS (
+    SELECT 
+        AVG(total_capacity) AS median_capacity
+    FROM (
+        SELECT 
+            total_capacity 
+        FROM StationCapacity
+        ORDER BY total_capacity
+        LIMIT 2 OFFSET (SELECT COUNT(*) FROM StationCapacity) / 2
+    ) AS med
+)
+SELECT 
+    galaxy, 
+    total_capacity 
+FROM 
+    StationCapacity
+WHERE 
+    total_capacity > (SELECT median_capacity FROM MedianCapacity);
+This uses two CTEs: one to calculate the total capacity of space stations in each galaxy and another to calculate the median total capacity. Finally, it filters galaxies where the total capacity exceeds the median.
+
+Query 5: Resource Distribution Analysis
+Identify the planets that have a surplus of resources. A planet is considered to have a surplus if the quantity of any resource is more than double the average quantity of that resource across all planets.
+
+
+WITH ResourceAvg AS (
+    SELECT 
+        resource_name, 
+        AVG(quantity) AS avg_quantity
+    FROM 
+        resources
+    GROUP BY resource_name
+)
+SELECT 
+    r.planet_id, 
+    p.planet_name, 
+    r.resource_name, 
+    r.quantity 
+FROM 
+    resources AS r
+JOIN planets AS p 
+    ON r.planet_id = p.planet_id
+JOIN ResourceAvg AS ra 
+    ON r.resource_name = ra.resource_name
+WHERE 
+    r.quantity > 2 * ra.avg_quantity;
+This query uses a CTE to calculate the average quantity of each resource across all planets, then finds planets where the quantity of any resource is more than double the average.

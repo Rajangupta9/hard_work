@@ -1,0 +1,40 @@
+1. Retrieve all the documents.
+ans:- db.collectionName.find();
+
+2. Retrieve the first document.
+ans:- db.collectionName.findone();
+
+3. Update the age of the employee to 35 where the first_name is "Sidnee".
+ans:- db.employee.updateOne({name: "sidnee"},
+{$set:{age: 35}});
+
+4. Change the salary of "Meredeth Groveham•• to 55000.
+ans:-db.employee.updateOne({Name: "Meredeth Groveham"}, {$set:{salary: 55000}});
+
+5. Update the last name of "Nikolaus" to "Park".
+ans: db.employee.updateOne({LastName:"Nikolaus"}, {$set: {LastName: "Park"}});
+
+6. Update the salary of all employees to 35000 where the age is 37.
+ans: db.employee.updateMany({age: 37}, {$set:{salary:35000}});
+
+7. Update the last name of all the employees to "Jamme" where the age is 28.
+ans: db.employee.updateMany({age:28}, {$set:{LastName: "Jamme"}})
+
+8. For all employees named "Kimbra", add a new field middle_name with the value "Marie".
+ans: db.employees.updateMany({ name: "Kimbra" },{ $set: { middle_name: "Marie" } })
+
+9. Find all users who are 33 years old.
+ans: db.employee.findall({age:33});
+
+10. Retrieve documents for users with a salary greater than 50000.
+ans: db.employee.findall({ salary: { $gt: 50000 } })
+
+
+11. Find all the users where the gender is Female and age is 79.
+ans: db.employee.findall({gender: Female , age: 79});
+
+12. Find all the employees where the first_name is "George" and gender is Male.
+ans: db.employee.findall({FirstName: "George" , gender: Male})
+
+13. Find all users whose salary is less than or equal to 50000.
+ans: db.employee.findall({salary: {$lte: 50000}});

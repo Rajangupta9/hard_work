@@ -1,0 +1,48 @@
+### Title: Enough Fuel Consumption
+
+### Level: Level 1 - Easy
+
+### Time to Solve the Problem: 5 Mins
+
+### Problem Description
+
+You are given two numbers, stored in variables with the names `fuel` and `distance`. 
+
+ You must calculate the value of `required`, determined by the product of `fuel` and `distance`. 
+
+ If `required` is greater than 50, the output should indicate that you have enough fuel, 
+
+otherwise, you should continue the journey.
+
+### Input
+
+**Input Format:**
+A single line containing two values, representing the amount of fuel and the distance to be covered.
+
+**Constraints:**
+
+- Both numbers are less than 1000.
+
+### Output
+
+**Output Format:**
+Print "Enough" if the `required` fuel is greater than 50, else print "Go On".
+
+### Sample Input 1
+1 46
+
+
+### Sample Output 1
+Go On
+
+begin 
+    input: fuel , distance
+
+    required = fuel * distance
+
+    if required > 50 then 
+        print "Enough"
+    else
+        print "Go on"
+
+End

@@ -1,0 +1,87 @@
+# Task 1: Create the Database
+
+* write the query to see all the database that you have in MySQL DBMS.
+ans:- SHOW Database;
+
+*Start by Create a database named - "Facebook".
+ans:- Create Database Facebook;
+
+*write the query to use the database "Facebook".
+ans :- USE Facebook;
+
+# Task 2: create the Table;
+ans: 
+CREATE TABLE Post (
+PostId int primary key,
+post_title varchar(100),
+post_discription varchar(255),
+created_at varchar(100),
+post_like int
+);
+*query to describe the schema of the table?
+ans: DESCRIBE Post;
+*query to delete the whole table?
+ans: DROP Table post;
+
+# task 3: Insert Data into Table: 
+
+CREATE TABLE Post (
+PostId int primary key,
+post_title varchar(100),
+post_discription varchar(255),
+created_by varchar(100),
+created_at timestamp,
+post_like int,
+isPublic boolean default false
+);
+
+
+insert Into Post value
+(1,	"The Joy of Painting"	,"Discover the simplicity and beauty of painting with this introductory guide",	"Alice"	,"2023-01-01 00:00:00" ,	5	,true);
+
+select * from post;
+
+insert into post (PostId , post_title , post_discription, created_by, created_at, post_like, isPublic)  values 
+(2,	"A Beginner's guide to Programming"	,"Dive into the world of programming with these easy to follow steps.",	"Bob"	,"2023-01-01 00:00:00" ,	20	,true),
+(3,	"Top 10 Healthy Eating Habits",	"Transform your diet and your life with these ten easy tips.",	"Charlie"	,"2023-01-03 00:00:00" ,	15	, true),
+(4,	"Understanding The Stock Market",	"Demystifying the stock market for beginners and seasoned investors alike.",	"Diana"	,"2023-01-04 00:00:00",	7,	false),
+(5, "The Future of Renewable Energy", "A look into how renewable energy sources will shape our future.", "Eve", "2023-01-05 00:00:00", 33, TRUE),
+(6, "The Secrets of Successful Entrepreneurs", "Learn what sets successful entrepreneurs apart from the rest.", "Frank", "2023-01-06 00:00:00", 12, false),
+(7, "Exploring the World of Photography", "A beginner's guide to capturing the world through the lens.", "Grace", "2023-01-07 00:00:00", 9, true),
+(8, "Mastering the Art of Cooking", "Elevate your cooking skills with these professional tips and tricks.", "Hank", "2023-01-08 00:00:00", 25, true),
+(9, "The Importance of Regular Exercise", "Why regular exercise is crucial for your health and how to get started.", "Irene", "2023-01-09 00:00:00", 14, true),
+(10, "Tips for Effective Time Management", "Maximize your productivity with these effective time management strategies.", "John", "2023-01-10 00:00:00", 18, true);
+
+# task 4 : Read data from the table
+select * from post;
+select created_by , post_discription from Post;
+
+
+# task 5: update a post
+update Post
+SET post_like = 50
+where PostId = 8;
+
+update Post
+set isPublic = false , post_discription = "this is only for me..."
+where created_by = "charlie";
+
+SET SQL_SAFE_UPDATES = 0; this cammand i am not to use it but its sql turn on unsafe mood.
+
+# task 6: Deleta a Post
+DELETE FROM Post
+WHERE PostId = 3;
+
+DELETE FROM post
+WHERE PostId = 6 AND created_by = "Frank";
+
+# task 7: filtering
+
+SELECT *
+FROM post
+WHERE isPublic = true;
+
+SELECT *
+FROM post
+WHERE post_like > 15;
+
