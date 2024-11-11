@@ -1,0 +1,115 @@
+{
+    "courses": {
+      "107": {
+        "title": "Advanced JavaScript Concepts",
+        "instructor": "Dr. Emily White",
+        "rating": 4.9,
+        "reviews": 389012,
+        "price": 3399,
+        "total_hours": 70.5,
+        "lectures": 405,
+        "level": "Advanced",
+        "bestseller": true
+      },
+      "108": {
+        "title": "Web Accessibility and Inclusive Design",
+        "instructor": "Prof. David Lee",
+        "rating": 4.6,
+        "reviews": 287654,
+        "price": 2899,
+        "total_hours": 56.7,
+        "lectures": 340,
+        "level": "Intermediate",
+        "bestseller": false
+      },
+      "109": {
+        "title": "Data Structures and Algorithms",
+        "instructor": "Dr. John Smith",
+        "rating": 4.8,
+        "reviews": 450987,
+        "price": 3299,
+        "total_hours": 65.3,
+        "lectures": 420,
+        "level": "Advanced",
+        "bestseller": true
+      },
+      "110": {
+        "title": "Full Stack Web Development",
+        "instructor": "Ms. Alice Brown",
+        "rating": 4.7,
+        "reviews": 302345,
+        "price": 2999,
+        "total_hours": 60.0,
+        "lectures": 380,
+        "level": "Intermediate",
+        "bestseller": true
+      },
+      "111": {
+        "title": "Python for Data Science",
+        "instructor": "Dr. Lucy Liu",
+        "rating": 4.5,
+        "reviews": 210567,
+        "price": 2799,
+        "total_hours": 55.8,
+        "lectures": 310,
+        "level": "Beginner",
+        "bestseller": false
+      },
+      "112": {
+        "title": "Machine Learning Basics",
+        "instructor": "Prof. Mark Wilson",
+        "rating": 4.6,
+        "reviews": 175430,
+        "price": 2899,
+        "total_hours": 50.4,
+        "lectures": 285,
+        "level": "Intermediate",
+        "bestseller": true
+      },
+      "113": {
+        "title": "Introduction to Artificial Intelligence",
+        "instructor": "Dr. Sarah Connor",
+        "rating": 4.4,
+        "reviews": 143567,
+        "price": 2699,
+        "total_hours": 48.9,
+        "lectures": 260,
+        "level": "Beginner",
+        "bestseller": false
+      },
+      "114": {
+        "title": "React Native for Mobile Development",
+        "instructor": "Ms. Anna Clark",
+        "rating": 4.3,
+        "reviews": 198765,
+        "price": 3199,
+        "total_hours": 53.6,
+        "lectures": 300,
+        "level": "Intermediate",
+        "bestseller": true
+      },
+      "115": {
+        "title": "Cloud Computing with AWS",
+        "instructor": "Mr. Tom Harris",
+        "rating": 4.6,
+        "reviews": 256987,
+        "price": 3499,
+        "total_hours": 59.0,
+        "lectures": 365,
+        "level": "Advanced",
+        "bestseller": true
+      },
+      "116": {
+        "title": "Cybersecurity Essentials",
+        "instructor": "Ms. Rachel Adams",
+        "rating": 4.7,
+        "reviews": 210111,
+        "price": 3099,
+        "total_hours": 54.7,
+        "lectures": 330,
+        "level": "Intermediate",
+        "bestseller": false
+      }
+    }
+  }
+  

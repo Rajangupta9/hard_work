@@ -1,34 +1,24 @@
-function trapped(n,m,mat){
-    let count = 0;
-  
-    for (let i = 0; i < n ; i++) {
-      for (let j = 0; j < m; j++) {
-        if (mat[i][j] === 0) {
-          if (i === 0) {
-              if(mat[i+1][j] === 1 && mat[i][j-1] === 1 && mat[i][j+1] === 1){
-                count++;
-              }
-          } else if (i === n-1) { 
-              if(mat[i-1][j] === 1 && mat[i][j-1] === 1 && mat[i][j+1] === 1){
-                count++;
-              }
-          } else if (j === 0) { 
-              if(mat[i-1][j] === 1 && mat[i+1][j] === 1 && mat[i][j+1] === 1){
-                count++;
-              }
-          } else if (j === m-1) { 
-              if(mat[i-1][j] === 1 && mat[i+1][j] === 1 && mat[i][j-1] === 1){
-                count++;
-              }
-          } 
-          else{
-              if(mat[i-1][j] === 1 && mat[i+1][j] === 1 && mat[i][j-1] === 1 && mat[i][j+1] === 1){
-                count++;
-              }
-          }
-      }  
+function solve(n,s,k){
+  let conti =0;
+  let c =0;
+  for(let i=0; i<n-1; i++){
+       //console.log(s[i],s[i+1])
+       if(s[i]==s[i+1]){
+           c++;
+      }else{
+      c++;
+      if(conti<c){
+        conti=c;
+      }
     }
-    console.log(count);
+  }
+  let total =0;
+  if(conti>=k){
+    if(conti-k>=0){
+      let n = conti-k +1;
+      total += (n*(n+1))/2
+    }
+    total += s.length - conti;
   }
 }
   function runProgram(input) {
