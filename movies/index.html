@@ -35,25 +35,12 @@
         </nav>
     
         <main>
-            <div class="movie-grid" id="movieGrid"></div>
+            <div class="cart-container">
+            </div>
+            
+
     
-            <div class="thumbnail">
-                <img src="https://example.com/thumbnail.jpg" alt="The Shawshank Redemption Thumbnail">
-            </div>
-            <div class="movie-details">
-                <div class="title">The Shawshank Redemption</div>
-                <div class="genre">Genre: Drama</div>
-                <div class="info"><span>Release Date:</span> 1994-09-23</div>
-                <div class="info"><span>Director:</span> Frank Darabont</div>
-                <div class="info"><span>Cast:</span> Tim Robbins, Morgan Freeman, Bob Gunton</div>
-                <div class="info"><span>Duration:</span> 142 mins</div>
-                <div class="rating">Rating: 9.3</div>
-                <div class="tags">
-                    <div class="tag">Inspirational</div>
-                    <div class="tag">Prison</div>
-                    <div class="tag">Friendship</div>
-                </div>
-            </div>
+            
 
             
       </div>
@@ -64,42 +51,17 @@
             </div>
         </main>
     
-        <div id="movieModal" class="modal">
-            <div class="modal-content">
-                <span class="close">&times;</span>
-                <div id="modalContent"></div>
-                <div class="comments-section">
-                    <h3>Comments & Ratings</h3>
-                    <div class="add-comment">
-                        <textarea id="commentText" placeholder="Add your comment..."></textarea>
-                        <div class="rating-input">
-                            <span>Rating:</span>
-                            <select id="ratingSelect">
-                                <option value="5">5 Stars</option>
-                                <option value="4">4 Stars</option>
-                                <option value="3">3 Stars</option>
-                                <option value="2">2 Stars</option>
-                                <option value="1">1 Star</option>
-                            </select>
-                        </div>
-                        <button id="submitComment">Submit</button>
-                    </div>
-                    <div id="commentsList"></div>
-                </div>
-            </div>
-        </div>
+        
     
-        <div id="loadingSpinner" class="loading-spinner">
-            <div class="spinner"></div>
-        </div>
+        
     
-        <div id="toastNotification" class="toast"></div>
+   
     
         <script>
             function fetchmovies() {
                 fetch("https://evolution-f6c01-default-rtdb.firebaseio.com/movies.json")
                     .then((res) => res.json())
-                    .then((data) => console.log(data));
+                    .then((data) => displayMovies(data));
             }
             
             function displayMovies(data) {
@@ -107,17 +69,27 @@
                 const movies = Object.entries(data);
                 movies.forEach((movie) => {
                     let movieId = movie[0];
-                    let { cast, direction, duration, genre, rating, release_date, tags, thumbnail_url, title } = movie[1];
+                    let { cast, direction, duration, genre, rating, release_date, tags, thumbnail_url, title , director } = movie[1];
                     
-                    console.log(`Title: ${title}`);
-                    console.log(`Cast: ${cast}`);
-                    console.log(`Direction: ${direction}`);
-                    console.log(`Duration: ${duration}`);
-                    console.log(`Genre: ${genre}`);
-                    console.log(`Rating: ${rating}`);
-                    console.log(`Release Date: ${release_date}`);
-                    console.log(`Tags: ${tags}`);
-                    console.log(`Thumbnail URL: ${thumbnail_url}`);
+                    let card = document.querySelector(".cart-container").innerHTML +=`
+                    <div class="movie-card">
+                    <div class="thumbnail">
+                        <img src=${thumbnail_url} alt="">
+                    </div>
+                    <div class="movie-details">
+                        <div class="title">${title}</div>
+                        <div class="genre">Genre: ${genre} </div>
+                        <div class="info"><span>Release Date:</span> ${release_date}</div>
+                        <div class="info"><span>Director:</span> ${director}</div>
+                        <div class="info"><span>Cast:</span>${cast.join(", ")}</div>
+                        <div class="info"><span>Duration:</span> ${duration}</div>
+                        <div class="rating">Rating: ${rating}</div>
+                        <div class="tags">
+                            <div class="tag">${tags.join(", ")}</div>
+                        </div>
+                    </div>
+                </div>`
+                    
                 });
             }
             
